@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "crypt.h"
+#include "vigenere.h"
 /**
     Fonction decale char.
     Cette fonction effectue un decalage sur une lettre.
