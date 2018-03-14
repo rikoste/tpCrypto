@@ -2,11 +2,12 @@
 #include <stdlib.h>
 #include <string.h>
 #include "vigenere.h"
+#include "error.h"
 /**
     Fonction decale char.
     Cette fonction effectue un decalage sur une lettre.
     Elle retourne 0 si aucun soucis, sinon elle renvoie un maessage d'erreur.
-    Retourne ERREUR_LETTRE si la lettre en entrée n'est pas valide
+    Retourne ERROR_LETTRE si la lettre en entrée n'est pas valide
 */
 int decalage_char(
     char src,
@@ -24,7 +25,7 @@ int decalage_char(
         ( 'A' > src ) ||
         ( 'Z' < src )
     ) {
-        return ERREUR_LETTRE;
+        return ERROR_LETTRE;
     }
 
     //-------------------------------------------------------------------------
@@ -66,7 +67,7 @@ int decalage_char(
 /**
     Fonction vigenere_chiffrement.
     Cette fonction chiffre le message chaine et l'ecrit dans dest.
-    Elle peut retourner ERREUR_CHAINE_VIDE si le message en entrée est null ou que la clé est incvalide.
+    Elle peut retourner ERROR_CHAINE_VIDE si le message en entrée est null ou que la clé est incvalide.
     Elle retourne OK si il n'y a aucun probleme.
 */ 
 int vigenere_chiffrement(
@@ -77,17 +78,17 @@ int vigenere_chiffrement(
     int longueur_code
 ) {
     if( chaine == NULL ) {
-        return ERREUR_CHAINE_VIDE;
+        return ERROR_CHAINE_VIDE;
     }
     if( code == NULL ) {
-        return ERREUR_CHAINE_VIDE;
+        return ERROR_CHAINE_VIDE;
     }
     if( dest == NULL ) {
-        return ERREUR_CHAINE_VIDE;
+        return ERROR_CHAINE_VIDE;
     }
     int i = 0;
     int j = 0;
-    int ret = ERREUR;
+    int ret = ERROR;
     while( i < longueur ) {
         if(j == longueur_code) {
             j = 0;
@@ -103,7 +104,7 @@ int vigenere_chiffrement(
             &dest[i],
             code[j]
         );
-        if(ret == ERREUR_LETTRE) {
+        if(ret == ERROR_LETTRE) {
             dest[i] = chaine[i];
         }
         j++;
@@ -118,7 +119,7 @@ int vigenere_chiffrement(
 /**
     Fonction vigenere_dechiffrement.
     Cette fonction dechiffre le message chaine et l'ecrit dans dest.
-    Elle peut retourner ERREUR_CHAINE_VIDE si le message en entrée est null ou que la clé est invalide.
+    Elle peut retourner ERROR_CHAINE_VIDE si le message en entrée est null ou que la clé est invalide.
     Elle retourne OK si il n'y a aucun probleme.
 */ 
 int vigenere_dechiffrement(
@@ -129,17 +130,17 @@ int vigenere_dechiffrement(
     int longueur_code
 ) {
     if( chaine == NULL ) {
-        return ERREUR_CHAINE_VIDE;
+        return ERROR_CHAINE_VIDE;
     }
     if( code == NULL ) {
-        return ERREUR_CHAINE_VIDE;
+        return ERROR_CHAINE_VIDE;
     }
     if( dest == NULL ) {
-        return ERREUR_CHAINE_VIDE;
+        return ERROR_CHAINE_VIDE;
     }
     int i = 0;
     int j = 0;
-    int ret = ERREUR;
+    int ret = ERROR;
     while( i < longueur ) {
         if(j == longueur_code) {
             j = 0;
@@ -155,7 +156,7 @@ int vigenere_dechiffrement(
             &dest[i],
             0 - code[j]
         );
-        if(ret == ERREUR_LETTRE) {
+        if(ret == ERROR_LETTRE) {
             dest[i] = chaine[i];
         }
         j++;
